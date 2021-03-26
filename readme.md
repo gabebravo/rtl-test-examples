@@ -1,4 +1,4 @@
-# Testing examples using React Testing LIbrary
+# React Testing Library Examples
 
 ## Important Links :
 
