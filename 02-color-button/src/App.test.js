@@ -22,3 +22,16 @@ test('button turns blue when clicked', () => {
   expect(buttonElm).toHaveStyle({ backgroundColor: 'red' }); // check the element style CHANGED
   expect(buttonElm.textContent).toBe('Change to Blue'); // check the exact text of the button
 });
+
+test('initial conditions', () => {
+  render(<App />);
+  // button starts enabled
+  const colorButton = screen.getByRole('button', { name: /change to red/i });
+  expect(colorButton).toBeEnabled(); // checks button is enabled
+
+  // checkbox starts unchecked
+  const checkboxElm = screen.getByRole('checkbox');
+  expect(checkboxElm).not.toBeChecked(); // checks the checkbox starts unchecked, uses not for assertion
+});
+
+test('check if checkbox toggles button disabled/enabled', () => {});
