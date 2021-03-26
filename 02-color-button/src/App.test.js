@@ -34,4 +34,17 @@ test('initial conditions', () => {
   expect(checkboxElm).not.toBeChecked(); // checks the checkbox starts unchecked, uses not for assertion
 });
 
-test('check if checkbox toggles button disabled/enabled', () => {});
+test('check if checkbox toggles button disabled/enabled', () => {
+  render(<App />);
+  // button elm
+  const colorButton = screen.getByRole('button', { name: /change to red/i });
+
+  // checkbox disables button
+  const checkboxElm = screen.getByRole('checkbox');
+  fireEvent.click(checkboxElm); // IMPORTANT : fires the click event on checkbox
+  expect(colorButton).not.toBeEnabled(); // checks button is enabled
+
+  // checkbox disables button
+  fireEvent.click(checkboxElm);
+  expect(colorButton).toBeEnabled(); // checks button is enabled
+});
