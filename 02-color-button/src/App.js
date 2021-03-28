@@ -10,15 +10,38 @@ function App() {
   const disbaleColorBtn = (ev) => setBtnDisabled(ev.target.checked);
 
   return (
-    <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-      <button
-        disabled={btnDisabled}
-        onClick={changeBtnColor}
-        style={{ backgroundColor: btnColor, color: '#FFF' }}
-      >
-        {`Change to ${btnColor === 'blue' ? 'Red' : 'Blue'}`}
-      </button>
-      <input type="checkbox" onChange={disbaleColorBtn} />
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop: '2rem',
+      }}
+    >
+      <div style={{ marginBottom: 15 }}>
+        <button
+          disabled={btnDisabled}
+          onClick={changeBtnColor}
+          style={{
+            backgroundColor: btnColor,
+            color: '#FFF',
+            padding: 10,
+            borderRadius: 5,
+          }}
+        >
+          {`Change to ${btnColor === 'blue' ? 'Red' : 'Blue'}`}
+        </button>
+      </div>
+      <div>
+        <input
+          type="checkbox"
+          id="disable-button-checkbox"
+          defaultChecked={btnDisabled}
+          aria-checked={btnDisabled}
+          onChange={disbaleColorBtn}
+        />
+        <label htmlFor="disable-button-checkbox">Disable button</label>
+      </div>
     </div>
   );
 }

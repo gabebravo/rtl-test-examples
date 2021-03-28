@@ -40,7 +40,9 @@ test('checkbox toggles button from enabled to disabled', () => {
   const colorButton = screen.getByRole('button', { name: /change to red/i });
 
   // checkbox disables button
-  const checkboxElm = screen.getByRole('checkbox');
+  const checkboxElm = screen.getByRole('checkbox', {
+    name: /disable button/i,
+  });
   fireEvent.click(checkboxElm); // IMPORTANT : fires the click event on checkbox
   expect(colorButton).toBeDisabled(); // checks button is disabled
 
