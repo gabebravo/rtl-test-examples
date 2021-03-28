@@ -23,7 +23,7 @@ function App() {
           disabled={btnDisabled}
           onClick={changeBtnColor}
           style={{
-            backgroundColor: btnColor,
+            backgroundColor: btnDisabled ? 'gray' : btnColor,
             color: '#FFF',
             padding: 10,
             borderRadius: 5,

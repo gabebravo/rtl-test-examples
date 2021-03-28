@@ -50,3 +50,45 @@ test('checkbox toggles button from enabled to disabled', () => {
   fireEvent.click(checkboxElm);
   expect(colorButton).toBeEnabled(); // checks button is enabled
 });
+
+test('checkbox disable turns button gray, enable turns color back', () => {
+  render(<App />);
+  // button elm
+  const colorButton = screen.getByRole('button', { name: /change to red/i });
+
+  // checkbox elm
+  const checkboxElm = screen.getByRole('checkbox', {
+    name: /disable button/i,
+  });
+
+  // checked disable checkbox turns button gray
+  fireEvent.click(checkboxElm);
+  expect(colorButton).toHaveStyle({ backgroundColor: 'gray' });
+
+  // unchecked disable checkbox turns button back to red
+  fireEvent.click(checkboxElm);
+  expect(colorButton).toHaveStyle({ backgroundColor: 'blue' });
+});
+
+test('change button color, then disable, then change back', () => {
+  render(<App />);
+  // button elm
+  const colorButton = screen.getByRole('button', { name: /change to red/i });
+
+  // checkbox elm
+  const checkboxElm = screen.getByRole('checkbox', {
+    name: /disable button/i,
+  });
+
+  // check button toggle changes color
+  fireEvent.click(colorButton);
+  expect(colorButton).toHaveStyle({ backgroundColor: 'red' });
+
+  // check disable checkbox turns button gray
+  fireEvent.click(checkboxElm);
+  expect(colorButton).toHaveStyle({ backgroundColor: 'gray' });
+
+  // check disable checkbox turns button back to red
+  fireEvent.click(checkboxElm);
+  expect(colorButton).toHaveStyle({ backgroundColor: 'red' });
+});
