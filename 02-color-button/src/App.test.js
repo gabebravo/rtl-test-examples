@@ -53,10 +53,7 @@ test('checkbox toggles button from enabled to disabled', () => {
 
 test('checkbox disable turns button gray, enable turns color back', () => {
   render(<App />);
-  // button elm
   const colorButton = screen.getByRole('button', { name: /change to red/i });
-
-  // checkbox elm
   const checkboxElm = screen.getByRole('checkbox', {
     name: /disable button/i,
   });
@@ -72,10 +69,7 @@ test('checkbox disable turns button gray, enable turns color back', () => {
 
 test('change button color, then disable, then change back', () => {
   render(<App />);
-  // button elm
   const colorButton = screen.getByRole('button', { name: /change to red/i });
-
-  // checkbox elm
   const checkboxElm = screen.getByRole('checkbox', {
     name: /disable button/i,
   });
