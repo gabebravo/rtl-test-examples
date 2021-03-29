@@ -1,18 +1,7 @@
-import { useState } from 'react';
-
-export function replaceCamelWithSpaces(colorName) {
-  return colorName.replace(/\B([A-Z])\B/g, ' $1'); // regex find cap letters, put space in front
-}
+import ComplexButton from './components/ComplexButton';
+import SimpleButton from './components/SimpleButton';
 
 function App() {
-  const [btnColor, setBtnColor] = useState('blue');
-  const [btnDisabled, setBtnDisabled] = useState(false);
-
-  const changeBtnColor = () =>
-    setBtnColor((prevState) => (prevState === 'blue' ? 'red' : 'blue'));
-
-  const disbaleColorBtn = (ev) => setBtnDisabled(ev.target.checked);
-
   return (
     <div
       style={{
@@ -22,30 +11,8 @@ function App() {
         marginTop: '2rem',
       }}
     >
-      <div style={{ marginBottom: 15 }}>
-        <button
-          disabled={btnDisabled}
-          onClick={changeBtnColor}
-          style={{
-            backgroundColor: btnDisabled ? 'gray' : btnColor,
-            color: '#FFF',
-            padding: 10,
-            borderRadius: 5,
-          }}
-        >
-          {`Change to ${btnColor === 'blue' ? 'Red' : 'Blue'}`}
-        </button>
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          id="disable-button-checkbox"
-          defaultChecked={btnDisabled}
-          aria-checked={btnDisabled}
-          onChange={disbaleColorBtn}
-        />
-        <label htmlFor="disable-button-checkbox">Disable button</label>
-      </div>
+      <ComplexButton />
+      <SimpleButton />
     </div>
   );
 }
