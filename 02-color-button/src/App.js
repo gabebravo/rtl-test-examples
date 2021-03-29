@@ -1,5 +1,9 @@
 import { useState } from 'react';
 
+export function replaceCamelWithSpaces(colorName) {
+  return colorName.replace(/\B([A-Z])\B/g, ' $1'); // regex find cap letters, put space in front
+}
+
 function App() {
   const [btnColor, setBtnColor] = useState('blue');
   const [btnDisabled, setBtnDisabled] = useState(false);

@@ -1,4 +1,5 @@
 import { render, screen, fireEvent, prettyDOM } from '@testing-library/react';
+import { replaceCamelWithSpaces } from './App'; // import function tested at bottom
 import App from './App';
 
 test('button has correct initial text', () => {
@@ -85,4 +86,18 @@ test('change button color, then disable, then change back', () => {
   // check disable checkbox turns button back to red
   fireEvent.click(checkboxElm);
   expect(colorButton).toHaveStyle({ backgroundColor: 'red' });
+});
+
+// describe statement is a way of describing a group of tests
+describe('spaces before camel-case capital letters', () => {
+  // TESTS GO INSIDE
+  test('works for no inner capital letters', () => {
+    expect(replaceCamelWithSpaces('Red')).toBe('Red');
+  });
+  test('works for one inner capital letter', () => {
+    expect(replaceCamelWithSpaces('MidnightBlue')).toBe('Midnight Blue');
+  });
+  test('works for multiple capital letters', () => {
+    expect(replaceCamelWithSpaces('MediumVioletRed')).toBe('Medium Violet Red');
+  });
 });
