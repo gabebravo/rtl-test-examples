@@ -1,4 +1,10 @@
-import { render, screen, fireEvent, prettyDOM } from '@testing-library/react';
+import {
+  render,
+  screen,
+  fireEvent,
+  cleanup,
+  // prettyDOM,
+} from '@testing-library/react';
 import SimpleButton from '../components/SimpleButton';
 
 const getElements = () => {
@@ -9,56 +15,56 @@ const getElements = () => {
 };
 
 describe('red/blue button tests', () => {
+  afterEach(cleanup);
+
   test('button has correct initial text', () => {
     // YOU CAN LOG ANY ELM LIKE THIS
     // console.log(prettyDOM(colorBtn));
-    const { colorBtn, checkbox } = getElements();
-    expect(colorBtn).toHaveTextContent(/change to red/i); // exact button text matches
+    const { colorBtn } = getElements();
+    expect(colorBtn).toHaveTextContent(/change to red/i);
   });
 
   test('button has correct initial color', () => {
-    const { colorBtn, checkbox } = getElements();
-    expect(colorBtn).toHaveStyle({ backgroundColor: 'blue' }); // ASSERTION : check the elemnt style
+    const { colorBtn } = getElements();
+    expect(colorBtn).toHaveStyle({ backgroundColor: 'blue' });
   });
 
   test('button turns blue when clicked', () => {
-    const { colorBtn, checkbox } = getElements();
-    fireEvent.click(colorBtn); // IMPORTANT : fires the click event on button
-    expect(colorBtn).toHaveStyle({ backgroundColor: 'red' }); // check the element style CHANGED
-    expect(colorBtn.textContent).toBe('Change to Blue'); // check the exact text of the button
+    const { colorBtn } = getElements();
+    fireEvent.click(colorBtn);
+    expect(colorBtn).toHaveStyle({ backgroundColor: 'red' });
+    expect(colorBtn.textContent).toBe('Change to Blue');
   });
 
   test('initial conditions', () => {
     const { colorBtn, checkbox } = getElements();
-    expect(colorBtn).toBeEnabled(); // checks button is enabled
-    expect(checkbox).not.toBeChecked(); // checks the checkbox starts unchecked, uses not for assertion
+    expect(colorBtn).toBeEnabled();
+    expect(checkbox).not.toBeChecked();
   });
 });
 
 describe('check box tests', () => {
+  afterEach(cleanup);
+
   test('checkbox toggles button from enabled to disabled', () => {
     const { colorBtn, checkbox } = getElements();
 
-    fireEvent.click(checkbox); // IMPORTANT : fires the click event on checkbox
-    expect(colorBtn).toBeDisabled(); // checks button is disabled
-
-    // checkbox disables button
     fireEvent.click(checkbox);
-    expect(colorBtn).toBeEnabled(); // checks button is enabled
+    expect(colorBtn).toBeDisabled();
+
+    fireEvent.click(checkbox);
+    expect(colorBtn).toBeEnabled();
   });
 
   test('change button color, then disable, then change back', () => {
     const { colorBtn, checkbox } = getElements();
 
-    // check button toggle changes color
     fireEvent.click(colorBtn);
     expect(colorBtn).toHaveStyle({ backgroundColor: 'red' });
 
-    // check disable checkbox turns button gray
     fireEvent.click(checkbox);
     expect(colorBtn).toHaveStyle({ backgroundColor: 'gray' });
 
-    // check disable checkbox turns button back to red
     fireEvent.click(checkbox);
     expect(colorBtn).toHaveStyle({ backgroundColor: 'red' });
   });
