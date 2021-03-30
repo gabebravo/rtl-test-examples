@@ -1,5 +1,11 @@
+import SummaryForm from './views/summary/SummaryForm';
+
 function App() {
-  return <div>Hello World</div>;
+  return (
+    <div>
+      <SummaryForm />
+    </div>
+  );
 }
 
 export default App;
