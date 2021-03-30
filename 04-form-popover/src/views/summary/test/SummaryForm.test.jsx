@@ -15,6 +15,7 @@ const getElements = () => {
 };
 
 describe('initial state and checkbox button enable/disable', () => {
+  afterEach(cleanup)
   const { confirmBtn, checkbox } = getElements()
 
   test('Checkbox is unchecked by default', () => {
