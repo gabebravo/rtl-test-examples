@@ -1,34 +1,32 @@
 import {
   render,
   screen,
-  fireEvent,
-  cleanup,
-  // prettyDOM,
+  waitForElementToBeRemoved,
 } from '@testing-library/react';
-import SummaryForm from '../SummaryForm'
+import SummaryForm from '../SummaryForm';
+import userEvent from '@testing-library/user-event';
 
-const getElements = () => {
+test('Initial conditions', () => {
   render(<SummaryForm />);
-  const confirmBtn = screen.getByRole('button', { name: /confirm order/i });
-  const checkbox = screen.getByRole('checkbox', { name: /I agree to Terms and Conditions/i });
-  return { confirmBtn, checkbox };
-};
+  const checkbox = screen.getByRole('checkbox', {
+    name: /terms and conditions/i,
+  });
+  expect(checkbox).not.toBeChecked();
 
-describe('initial state and checkbox button enable/disable', () => {
-  afterEach(cleanup)
-  const { confirmBtn, checkbox } = getElements()
+  const confirmButton = screen.getByRole('button', { name: /confirm order/i });
+  expect(confirmButton).toBeDisabled();
+});
 
-  test('Checkbox is unchecked by default', () => {
-    expect(checkbox).not.toBeChecked()
-  })
+test('Checkbox enables button on first click and disables on second click', () => {
+  render(<SummaryForm />);
+  const checkbox = screen.getByRole('checkbox', {
+    name: /terms and conditions/i,
+  });
+  const confirmButton = screen.getByRole('button', { name: /confirm order/i });
 
-  test('Checking checkbox enables button', () => {
-    fireEvent.click(checkbox)
-    expect(confirmBtn).toBeEnabled
-  })
+  userEvent.click(checkbox);
+  expect(confirmButton).toBeEnabled();
 
-  test('Unchecking checkbox again disables button', () => {
-    fireEvent.click(checkbox)
-    expect(confirmBtn).toBeDisabled
-  })
-})
+  userEvent.click(checkbox);
+  expect(confirmButton).toBeDisabled();
+});

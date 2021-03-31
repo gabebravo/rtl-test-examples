@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
 export default function SummaryForm() {
   const [tcChecked, setTcChecked] = useState(false);
 
@@ -11,6 +10,7 @@ export default function SummaryForm() {
     </span>
   );
 
+  console.log(`tcChecked`, tcChecked)
   return (
     <Form>
       <Form.Group controlId="terms-and-conditions">
