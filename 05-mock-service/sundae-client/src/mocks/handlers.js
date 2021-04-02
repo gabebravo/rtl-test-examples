@@ -26,6 +26,10 @@ export const handlers = [
           name: 'Hot fudge',
           imagePath: '/images/hot-fudge.png',
         },
+        {
+          name: 'Cherries',
+          imagePath: '/images/cherries.png',
+        },
       ])
     );
   }),
