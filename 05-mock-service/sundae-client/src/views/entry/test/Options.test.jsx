@@ -1,4 +1,4 @@
-import { render, screen, prettyDOM } from '@testing-library/react' 
+import { render, screen } from '../../../test-utils/rtl-utils'
 import Options from '../Options'
 
 test('displays img for each scoop from service', async () => {
